@@ -10,28 +10,39 @@ export default function TodoList() {
 		setTodo(e.target.value);
 	};
 
+	let header =
+		state.length === 0 ? (
+			<h1>Congrats! You have no todos. Take a break!</h1>
+		) : (
+			<h3>Number of Todos: {state.length}</h3>
+		);
+
 	return (
 		<div>
 			<div>
 				<input className="input" type="text" name="todo" onChange={handleChanges} />
-				<button onClick={() => dispatch({ type: 'ADD_TODO', payload: todoItem })}>Add Todo</button>
+				<button type="submit" onClick={() => dispatch({ type: 'ADD_TODO', payload: todoItem })}>
+					Add Todo
+				</button>
+
+				<button onClick={() => dispatch({ type: 'REMOVE_COMPLETED' })}>Remove completed.</button>
 			</div>
+			<div>{header}</div>
 			{state.map((item) => {
 				return (
 					<div>
 						{!item.completed ? (
 							<div>
-								<h1>{item.item}</h1>
-								<button onClick={() => dispatch({ type: 'COMPLETE', payload: item.id })}>
-									Complete
-								</button>
+								<h1 onClick={() => dispatch({ type: 'COMPLETE', payload: item.id })}>{item.item}</h1>
 							</div>
 						) : (
 							<div>
-								<h1 className="completed">{item.item}</h1>
-								<button onClick={() => dispatch({ type: 'COMPLETE', payload: item.id })}>
-									Complete
-								</button>
+								<h1
+									className="completed"
+									onClick={() => dispatch({ type: 'COMPLETE', payload: item.id })}
+								>
+									{item.item}
+								</h1>
 							</div>
 						)}
 					</div>

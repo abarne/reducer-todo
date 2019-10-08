@@ -16,6 +16,9 @@ export const todo = [
 export function reducer(state, action) {
 	switch (action.type) {
 		case 'ADD_TODO':
+			if (action.payload === '') {
+				return state;
+			}
 			console.log('we are in ADD_TODO', state);
 			const newTodo = {
 				item: action.payload,
@@ -25,6 +28,8 @@ export function reducer(state, action) {
 			return [ ...state, newTodo ];
 		case 'COMPLETE':
 			return state.map((todo) => (todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo));
+		case 'REMOVE_COMPLETED':
+			return state.filter((item) => !item.completed);
 		default:
 			return state;
 	}

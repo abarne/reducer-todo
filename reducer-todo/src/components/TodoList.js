@@ -26,6 +26,7 @@ export default function TodoList() {
 				</button>
 
 				<button onClick={() => dispatch({ type: 'REMOVE_COMPLETED' })}>Remove completed.</button>
+				<button onClick={() => dispatch({ type: 'REMOVE_ALL' })}>Remove all.</button>
 			</div>
 			<div>{header}</div>
 			{state.map((item) => {

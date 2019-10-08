@@ -30,6 +30,8 @@ export function reducer(state, action) {
 			return state.map((todo) => (todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo));
 		case 'REMOVE_COMPLETED':
 			return state.filter((item) => !item.completed);
+		case 'REMOVE_ALL':
+			return [];
 		default:
 			return state;
 	}
